@@ -58,7 +58,8 @@ As you can see, students Bob and David have the same score (90), so they share t
 Remember that the `RANK()` function is just one of the many window functions available in SQL. Other window functions like `DENSE_RANK()`, `ROW_NUMBER()`, and `NTILE()` provide additional ranking and analytical capabilities.
 
 **DENSE_RANK():**
-   The `DENSE_RANK()` function is used to assign a unique rank to each distinct row within a result set. If two or more rows have the same values for the sorting criteria, they will be assigned the same rank, and the next rank(s) will be skipped. The ranks are dense, meaning there are no gaps in the ranking sequence.
+
+The `DENSE_RANK()` function is used to assign a unique rank to each distinct row within a result set. If two or more rows have the same values for the sorting criteria, they will be assigned the same rank, and the next rank(s) will be skipped. The ranks are dense, meaning there are no gaps in the ranking sequence.
 
    Syntax:
    ```sql
@@ -92,7 +93,8 @@ Remember that the `RANK()` function is just one of the many window functions ava
    ```
 
 **ROW_NUMBER():**
-   The `ROW_NUMBER()` function assigns a unique sequential number to each row within a result set, regardless of any ties in the sorting criteria. This means that every row receives a different number, even if multiple rows have the same values for the sorting column(s).
+
+The `ROW_NUMBER()` function assigns a unique sequential number to each row within a result set, regardless of any ties in the sorting criteria. This means that every row receives a different number, even if multiple rows have the same values for the sorting column(s).
 
    Syntax:
    ```sql
@@ -126,7 +128,8 @@ Remember that the `RANK()` function is just one of the many window functions ava
    ```
 
 **NTILE():**
-   The `NTILE()` function divides the result set into a specified number of equally sized buckets or groups and assigns a group number to each row. If there are N rows and the `NTILE(N)` function is used, each group will contain approximately the same number of rows. It's particularly useful when you need to divide data into quartiles, deciles, or other quantiles.
+
+The `NTILE()` function divides the result set into a specified number of equally sized buckets or groups and assigns a group number to each row. If there are N rows and the `NTILE(N)` function is used, each group will contain approximately the same number of rows. It's particularly useful when you need to divide data into quartiles, deciles, or other quantiles.
 
    Syntax:
    ```sql
@@ -162,7 +165,8 @@ Remember that the `RANK()` function is just one of the many window functions ava
 As you can see, the `NTILE(3)` function divided the data into three groups, each containing two students.
 
 **COUNT():**
-   The `COUNT()` function returns the number of rows in the current window (partition). It can be used to count the occurrences of a particular column or to count all rows in the partition.
+
+The `COUNT()` function returns the number of rows in the current window (partition). It can be used to count the occurrences of a particular column or to count all rows in the partition.
 
    Syntax:
    ```sql
@@ -324,7 +328,8 @@ These window functions (`COUNT()`, `AVG()`, and `SUM()`) are powerful tools for 
    +------+------------+--------+-----------------+
 
 **LAST_VALUE():**
-   The `LAST_VALUE()` function returns the value of a specified expression from the last row within the current window (partition) based on the specified ordering. It helps you extract the last occurrence of a column value within each group.
+
+The `LAST_VALUE()` function returns the value of a specified expression from the last row within the current window (partition) based on the specified ordering. It helps you extract the last occurrence of a column value within each group.
 
    Syntax:
    ```sql
@@ -357,7 +362,9 @@ These window functions (`COUNT()`, `AVG()`, and `SUM()`) are powerful tools for 
    +------+------------+--------+----------------+
    
 Note: The `LAST_VALUE()` function may not always provide the expected results in all SQL database systems. This is due to the way data is ordered and processed in some systems. To ensure accurate results, consider using a subquery or a self-join to get the last value instead.
+
 **LAG()**
+
 The `LAG()` function is a window function in SQL that allows you to access the value of a specific row from the previous row within a result set, based on a defined order. This function is useful for comparing the current row's value with the value of the preceding row or performing calculations that involve the previous row's data.
 The basic syntax of the `LAG()` function is as follows:
 ```sql
@@ -405,6 +412,7 @@ In this example, the `LAG()` function returns the previous day's sales amount fo
 The `LAG()` function is helpful for performing time-series analysis, calculating differences between consecutive rows, identifying trends, and other types of sequential data processing in SQL.
 
 **LEAD()**
+
 The `LEAD()` function is a window function in SQL that allows you to access the value of a specific row from the following row within a result set, based on a defined order. It is the counterpart of the `LAG()` function, which retrieves the previous row's value. The `LEAD()` function is useful for comparing the current row's value with the value of the next row or performing calculations that involve the subsequent row's data.
 The basic syntax of the `LEAD()` function is as follows:
 ```sql
@@ -452,7 +460,8 @@ In this example, the `LEAD()` function returns the next day's sales amount for e
 The `LEAD()` function is helpful for performing time-series analysis, calculating differences between consecutive rows, identifying trends, and other types of sequential data processing in SQL. It complements the `LAG()` function and together, they provide a powerful way to analyze data in ordered sequences.
 
 **LISTAGG()**
-`LISTAGG()` is an aggregate function in SQL used to concatenate values from multiple rows into a single string. This function is especially helpful when you want to combine the values of a specific column for each group into a comma-separated list or any other delimiter-separated list.
+
+The `LISTAGG()` is an aggregate function in SQL used to concatenate values from multiple rows into a single string. This function is especially helpful when you want to combine the values of a specific column for each group into a comma-separated list or any other delimiter-separated list.
 The basic syntax of the `LISTAGG()` function is as follows:
 ```sql
 LISTAGG(expression, delimiter) WITHIN GROUP (ORDER BY sort_expression)
@@ -496,7 +505,8 @@ In this example, we grouped the employees by their respective departments and us
 Please note that the `LISTAGG()` function is available in some database systems like Oracle, but its availability might vary depending on the specific SQL implementation. Additionally, for very long concatenated strings, there may be limitations on the maximum size of the resulting string, depending on the database system.
 
 **ROLLUP()**
-`ROLLUP()` is an extension to the `GROUP BY` clause in SQL that is used for generating subtotal rows and a grand total row in the result set. It is commonly used to create hierarchical reports that summarize data at different aggregation levels.
+
+The `ROLLUP()` is an extension to the `GROUP BY` clause in SQL that is used for generating subtotal rows and a grand total row in the result set. It is commonly used to create hierarchical reports that summarize data at different aggregation levels.
 The `ROLLUP()` function generates multiple levels of grouping for the specified columns, producing subtotals for each combination of the grouped columns and a grand total row that aggregates all the data.
 The basic syntax of the `ROLLUP()` function is as follows:
 ```sql
@@ -549,6 +559,7 @@ In the result, you can see that `ROLLUP()` created subtotal rows for each produc
 The `ROLLUP()` function is particularly useful for generating aggregated reports that show different levels of summaries for your data. It simplifies the process of creating hierarchical reports without the need for complex SQL queries or multiple queries.
 
 **CUBE()**
+
 `CUBE()` is an extension to the `GROUP BY` clause in SQL that is used for generating subtotal rows and a grand total row in the result set, similar to `ROLLUP()`. However, `CUBE()` goes a step further and generates all possible combinations of the specified grouping columns, creating a more extensive set of subtotals and grand totals.
 The `CUBE()` function produces a result set that includes subtotals for each combination of the grouped columns, as well as a grand total row that aggregates all the data. It generates a more comprehensive summary of data across multiple dimensions.
 The basic syntax of the `CUBE()` function is as follows:
@@ -605,6 +616,7 @@ In the result, you can see that `CUBE()` created subtotal rows for each combinat
 The `CUBE()` function is particularly useful when you need to create comprehensive summary reports across multiple dimensions of your data. It provides a complete view of the data's aggregation at various levels and saves you from writing multiple queries or performing additional data manipulations to achieve the same result.
 
 **Common Table Expression**
+
 In Oracle, a Common Table Expression (CTE) is a named temporary result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement. CTEs are defined using the `WITH` clause and are particularly useful when you need to break down complex queries into smaller, more manageable parts, making the SQL code more readable and maintainable.
 The basic syntax of a CTE in Oracle is as follows:
 ```sql
@@ -657,9 +669,9 @@ Result:
 In this example, we used a CTE named `AvgSalary` to calculate the average salary of all employees. Then, in the main query, we performed a `CROSS JOIN` with the CTE and selected only those employees whose salary is above the calculated average salary.
 CTEs can simplify complex queries, make the SQL code more readable, and reduce redundancy by creating reusable subqueries. They are a powerful tool to optimize and structure your SQL code when dealing with large and intricate data sets.
 
-**PL/SQL**
-In PL/SQL, which is Oracle's procedural extension of SQL, you can use several types of collections for data manipulation, including those applicable to data science. Collections are composite data types that allow you to store and process multiple values as a single unit. Some commonly used collections in PL/SQL for data science purposes include:
+**PL/SQL Collections**
 
+In PL/SQL, which is Oracle's procedural extension of SQL, you can use several types of collections for data manipulation, including those applicable to data science. Collections are composite data types that allow you to store and process multiple values as a single unit. Some commonly used collections in PL/SQL for data science purposes include:
 
 When working with data science in PL/SQL, you can use these collection types to hold and manipulate data, perform calculations, and implement algorithms. They provide flexibility and efficiency in handling large datasets within PL/SQL procedures and functions.
 Remember that while PL/SQL can be useful for data manipulation and some data analysis tasks, data science tasks typically require more specialized tools and libraries, such as Python with libraries like Pandas, NumPy, and Scikit-learn. If you are involved in data science work, using Python or other specialized data science tools is likely to be more suitable for most data analysis and machine learning tasks.
@@ -668,6 +680,7 @@ Bulk processing and context switching are two concepts used in database manageme
 
 
 **Combining Bulk Processing and Context Switching:**
+
 To optimize data processing, it's essential to minimize context switching and leverage bulk processing where possible. This can be achieved by performing data operations using set-based SQL operations rather than row-by-row processing in procedural code.
 ```sql
 -- Bulk Processing using a single SQL UPDATE statement
@@ -690,7 +703,7 @@ To mitigate the performance impact of context switching, it's essential to desig
 
 **BULK COLLECT**
 
-`BULK COLLECT` is a powerful feature in PL/SQL that allows you to retrieve multiple rows of data from the database into collections in a single operation. It is designed to improve the performance of data retrieval and processing by reducing the number of individual context switches between the database and the application.
+The `BULK COLLECT` is a powerful feature in PL/SQL that allows you to retrieve multiple rows of data from the database into collections in a single operation. It is designed to improve the performance of data retrieval and processing by reducing the number of individual context switches between the database and the application.
 The basic syntax of the `BULK COLLECT` statement is as follows:
 ```sql
 BULK COLLECT INTO collection_name
@@ -722,6 +735,7 @@ Advantages of `BULK COLLECT`:
 `BULK COLLECT` is especially useful when dealing with large datasets or when you need to retrieve multiple columns or rows of data for further processing. It is widely used in PL/SQL to enhance the performance of data retrieval and processing operations, making it an essential feature for efficient database programming.
 
 **FORALL**
+
 `FORALL` is another powerful feature in PL/SQL that is used in conjunction with collections to perform bulk data manipulation efficiently. It allows you to execute a DML (Data Manipulation Language) statement (e.g., INSERT, UPDATE, DELETE) for multiple rows in a single operation, instead of processing each row individually. This can significantly improve the performance of data modification operations.
 The basic syntax of the `FORALL` statement is as follows:
 ```sql
@@ -818,6 +832,8 @@ To keep the materialized view up-to-date, we can refresh it on-demand or on a sc
 With this materialized view, we can significantly improve query performance when retrieving the total sales amount for each product category. Instead of repeatedly calculating the sums from the `orders` table, the database will directly access the precomputed results stored in the materialized view.
 Please note that the syntax and usage of materialized views may vary depending on the specific database management system (e.g., Oracle, PostgreSQL, etc.) being used. The example provided above uses Oracle syntax.
 
+**BUILD IMMEDIATE**
+
 The "build immediate" clause in the context of creating a materialized view is used to indicate that the materialized view should be populated with data immediately upon creation. It ensures that the materialized view is fully refreshed and up-to-date before the creation process completes. This is useful when you want to ensure that the materialized view is ready to be queried as soon as it is created.
 Let's revisit the example of creating a materialized view for the total sales amount for each product category, but this time we'll include the "build immediate" clause:
 ```sql
@@ -833,6 +849,8 @@ With the "build immediate" clause, the materialized view `mv_product_sales` will
 Please note that the "build immediate" clause is optional, and if not specified, the materialized view is created with an "on demand" build option. In that case, the materialized view will be populated with data during the first refresh operation, which can be done manually or based on a defined refresh schedule.
 When using "build immediate," the materialized view will be available for querying immediately after creation. However, depending on the size of the underlying data and complexity of the query, the initial population of the materialized view may take some time.
 In summary, the "build immediate" clause is used to ensure that a materialized view is populated with data immediately upon creation, allowing it to be queried without delay. This can be useful in scenarios where you want to have a readily available materialized view for quick data access.
+
+**BUILD DEFERRED**
 
 When you create a materialized view with the `BUILD DEFERRED` clause, it means that the materialized view is initially empty, and its data is not populated immediately during the creation process. Instead, the materialized view will be populated with data later when a specific refresh operation is explicitly performed.
 Let's take the example of creating a materialized view for the total sales amount for each product category with the `BUILD DEFERRED` clause:
@@ -865,7 +883,6 @@ BEGIN
 END;
 
 ```
-**BUILD DEFERRED**
 Using `BUILD DEFERRED` gives you the flexibility to control when the data is populated in the materialized view. This can be advantageous in situations where you have large datasets, and you want to manage the timing of the initial population and subsequent refreshes to optimize system resources and performance.
 Please keep in mind that the specific syntax and behavior of materialized views, including the use of `BUILD DEFERRED`, may vary depending on the database system being used (e.g., Oracle, PostgreSQL, etc.). Always refer to the documentation of your specific database management system for detailed information on creating and managing materialized views.
 
@@ -877,6 +894,7 @@ The choice of refresh type depends on factors such as the frequency of data chan
 Both on-demand and automatic refreshes have their use cases, and the choice depends on your specific requirements and the data update patterns in the underlying base tables. On-demand refresh gives you more control over when the refresh occurs, while automatic refresh takes care of refreshing the materialized view based on a predefined schedule.
 
 **ON COMMIT**
+
 "ON COMMIT" is another way to refresh a materialized view, but it is specifically used in the context of maintaining a materialized view's data automatically and immediately after each data change in the underlying base tables.
 When you create a materialized view with the "ON COMMIT" clause, it specifies that the materialized view is to be refreshed automatically and immediately after each transaction that modifies the data in the base tables. The refresh happens as part of the same transaction that performs the data modification.
 Let's look at an example of creating a materialized view with the "ON COMMIT" clause:
@@ -890,6 +908,7 @@ GROUP BY Product;
 
 ```
 **ON COMMIT REFRESH**
+
 With "ON COMMIT REFRESH," the materialized view `mv_product_sales` will be refreshed automatically and immediately after each transaction that modifies data in the `orders` table. If there are multiple changes within a transaction, the materialized view is updated once after the entire transaction is completed successfully.
 Using "ON COMMIT" refresh is particularly useful when you need the materialized view to always reflect the latest data in real-time, immediately after changes occur in the base tables. It is commonly employed in scenarios where you have frequently updated data, and you want the materialized view to provide the latest aggregated or precomputed information without any delay.
 Please note that "ON COMMIT" refresh is available in some database management systems, such as Oracle. The exact syntax and behavior may vary depending on the database system being used. Additionally, "ON COMMIT" refresh may have some performance considerations as it refreshes the materialized view as part of the transaction, which can impact the overall transaction processing time. Careful evaluation and testing should be done based on the specific use case and data update patterns to determine if "ON COMMIT" refresh is suitable for your application.
@@ -910,7 +929,9 @@ CREATE TABLE Sales (
 );
 
 ```
+
 **Scenario with Partitioning:**
+
 To address the challenges posed by large tables, we can use partitioning based on a partitioning key. In this example, we'll partition the "Sales" table based on the transaction date.</p>```sql
 CREATE TABLE Sales (
     transaction_id NUMBER,
@@ -928,7 +949,9 @@ INTERVAL (NUMTODSINTERVAL(1, 'DAY'))
 ```
 In this example, we are using "RANGE" partitioning based on the "transaction_date" column. The "INTERVAL" clause defines the partition interval, which automatically creates new partitions as new data is inserted, based on the specified interval (e.g., 1 day).
 With partitioning, the "Sales" table is divided into multiple partitions based on the range of "transaction_date" values. For example:
-* Partition P1: Contains data with "transaction_date" values less than '2023-01-01'.* Partition P2: Automatically created and contains data with "transaction_date" values between '2023-01-01' and '2023-01-02'.* Partition P3: Automatically created and contains data with "transaction_date" values between '2023-01-02' and '2023-01-03'.* And so on...**Benefits of Partitioning:**
+* Partition P1: Contains data with "transaction_date" values less than '2023-01-01'.* Partition P2: Automatically created and contains data with "transaction_date" values between '2023-01-01' and '2023-01-02'.* Partition P3: Automatically created and contains data with "transaction_date" values between '2023-01-02' and '2023-01-03'.* And so on...
+
+**Benefits of Partitioning:**
 
 1. **Query Performance:** Partition pruning allows the database to skip irrelevant partitions when executing queries, resulting in faster and more efficient data retrieval.
 2. **Maintenance Flexibility:** Partitioning enables the management of data at a partition level, allowing for easier and faster data maintenance operations like archiving or purging old data.
