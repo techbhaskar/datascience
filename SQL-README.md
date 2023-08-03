@@ -970,8 +970,11 @@ Each type of partitioning has its advantages and is suited for different data di
 **Auto List Partitioning:**
 
 Auto List Partitioning is a feature introduced in Oracle Database 12c and later versions. It provides an automatic way to create partitions based on unique values in a specified column. When new unique values are encountered in the partitioning key column during data insertion, Oracle automatically creates new partitions to accommodate these values.
-<p>Example:
-Let's consider a table for storing sales data with the "product_category" as the partitioning key:</p>```sql
+
+Example:
+Let's consider a table for storing sales data with the "product_category" as the partitioning key:
+
+```sql
 CREATE TABLE Sales (
     transaction_id NUMBER,
     transaction_date DATE,
@@ -983,22 +986,28 @@ AUTO (DEFAULT)
 (
     PARTITION p_default VALUES (DEFAULT)
 );
-
 ```
+
 In this example, we use the `AUTO (DEFAULT)` clause to enable auto list partitioning. The `DEFAULT` partition will hold any data that does not match any specific partition.
+
 When you insert data into the "Sales" table with new "product_category" values, Oracle automatically creates new partitions as needed. For example:
+
 ```sql
 INSERT INTO Sales VALUES (101, TO_DATE('2023-07-25', 'YYYY-MM-DD'), 1001, 'Electronics');
-
 ```
+
 If "Electronics" is a new product category not existing in any partition, Oracle automatically creates a new partition for it.
+
 Auto List Partitioning is particularly useful when you have rapidly growing datasets with varying partition keys and want to automate the partition management process.
 
 **Virtual Column Based Partitioning:**
 
 Virtual Column Based Partitioning allows you to define virtual columns as the partitioning key, enabling you to use complex expressions or functions to determine partition boundaries. Virtual columns are not physically stored in the table but are computed on-the-fly when queried or used as partitioning keys.
-<p>Example:
-Suppose you have a "Sales" table with a virtual column "sales_month" to extract the month from the "transaction_date" column for partitioning:</p>```sql
+
+Example:
+Suppose you have a "Sales" table with a virtual column "sales_month" to extract the month from the "transaction_date" column for partitioning:
+
+```sql
 CREATE TABLE Sales (
     transaction_id NUMBER,
     transaction_date DATE,
@@ -1013,9 +1022,12 @@ PARTITION BY RANGE (sales_month)
     PARTITION p3 VALUES LESS THAN (10),
     PARTITION p4 VALUES LESS THAN (MAXVALUE)
 );
-
 ```
+
 In this example, we use the `GENERATED ALWAYS AS` clause to create the virtual column "sales_month," which extracts the month from the "transaction_date" column. The "Sales" table is then partitioned using the "sales_month" virtual column with range partitioning.
+
 The use of virtual columns as partitioning keys allows for more dynamic partitioning strategies, as the partition boundaries are determined based on the computed values of the virtual columns.
+
 Virtual Column Based Partitioning is valuable when you need more complex partitioning rules that involve functions or expressions on the data. It provides greater flexibility and reduces the need for additional storage to accommodate the virtual columns.
+
 Both Auto List Partitioning and Virtual Column Based Partitioning offer advanced partitioning options that can improve data organization, performance, and management in large databases with diverse data patterns. When designing partitioning strategies, consider the specific requirements of your application and the characteristics of your data to choose the most suitable partitioning technique.
